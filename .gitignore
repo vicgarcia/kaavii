@@ -1,0 +1,5 @@
+# don't track the composer dependencies
+get_composer
+vendor/*
+composer.lock
+composer.phar
