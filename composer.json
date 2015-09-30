@@ -1,0 +1,14 @@
+{
+    "name": "vicgarcia/kaavii",
+    "description": "KaaVii (pronounced Kay Vee) is a package to provide components to interact with Redis",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "KaaVii": "source/"
+        }
+    }
+}
