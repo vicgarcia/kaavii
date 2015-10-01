@@ -1,12 +1,13 @@
 {
     "name": "vicgarcia/kaavii",
     "description": "KaaVii (pronounced Kay Vee) is a package to provide components to interact with Redis",
-    "keywords": [ "redis", "cache", "caching", "key-value", "in-memory", "data", "persistance" ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "type": "library",
     "require": {
         "php": ">=5.4.0",
         "ext-redis": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
