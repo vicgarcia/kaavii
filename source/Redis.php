@@ -51,17 +51,20 @@ class Redis
         } else if (!empty(self::$config)) {
             $conf = self::$config;
         } else {
-            // throw exception for no config
             throw new \Exception('no config present for KaaVii\Redis');
         }
 
-        // setup redis client
         $redis = new \Redis;
 
+        // XXX perhaps a switch that throws exception on default for invalid scheme
         if ($conf['scheme'] == 'tcp') {
-            $redis->connect($conf['host'], $config['port']);
+            if ( !empty($conf['host']) and !empty($conf['port']) ) {
+                $redis->connect($conf['host'], $config['port']);
+            }
         } else if ($conf['scheme'] == 'unix') {
-            $redis->connect($conf['socket']);
+            if ( !empty($conf['socket']) ) {
+                $redis->connect($conf['socket']);
+            }
         }
 
         if (!empty($conf['password'])) {
