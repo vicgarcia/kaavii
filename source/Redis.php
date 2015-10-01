@@ -16,59 +16,60 @@ class Redis
      *        'port' => '6379'
      *     ];
      *
+     * config array looks like so ...
+     *
+     *   $config = array(
+     *       'scheme'   => 'tcp',
+     *       'host'     => <ip or hostname>,
+     *       'port'     => <port>,
+     *       'database' => <# of db to use>,
+     *       'password' => <password>,
+     *   );
+     *
+     *   $config = array(
+     *       'scheme'   => 'unix',
+     *       'socket'   => <unix socket for redis instance>,
+     *       'database' => <# of db to use>,
+     *       'password' => <password>,
+     *   );
+     *
+     *
      **/
     public static
         $config = null;
 
     /**
-     * returns a configured redis client
+     * returns a configured \Redis object
      *
-     * static config will be used if none provided in constructor params
-     *
-     * config array looks like so ...
-     *
-     *     $config = array(
-     *         'scheme'   => 'tcp',
-     *         'host'     => <ip or hostname>,
-     *         'port'     => <port>,
-     *         'database' => <# of db to use>,
-     *         'password' => <password>,
-     *     );
-     *
-     *     $config = array(
-     *         'scheme'   => 'unix',
-     *         'socket'   => <unix socket for redis instance>,
-     *         'database' => <# of db to use>,
-     *         'password' => <password>,
-     *     );
+     * static config will be used if none provided in constructor
      *
      **/
-    public static function connect($configParam = null)
+    public static function connect($config = null)
     {
-        if (!empty($configParam)) {
-            $config = $configParam;
+        if (!empty($config)) {
+            $conf = $config;
         } else if (!empty(self::$config)) {
-            $config = self::$config;
+            $conf = self::$config;
         } else {
             // throw exception for no config
-            throw new \Exception('No config present for KaaVii\Redis');
+            throw new \Exception('no config present for KaaVii\Redis');
         }
 
         // setup redis client
         $redis = new \Redis;
 
-        if ($config['scheme'] == 'tcp') {
-            $redis->connect($config['host'], $config['port']);
-        } else if ($config['scheme'] == 'unix') {
-            $redis->connect($config['socket']);
+        if ($conf['scheme'] == 'tcp') {
+            $redis->connect($conf['host'], $config['port']);
+        } else if ($conf['scheme'] == 'unix') {
+            $redis->connect($conf['socket']);
         }
 
-        if (!empty($config['password'])) {
-            $redis->auth($config['password']);
+        if (!empty($conf['password'])) {
+            $redis->auth($conf['password']);
         }
 
-        if (!empty($config['database'])) {
-            $redis->select($config['database']);
+        if (!empty($conf['database'])) {
+            $redis->select($conf['database']);
         }
 
         return $redis;
