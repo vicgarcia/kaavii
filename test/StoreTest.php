@@ -4,14 +4,9 @@ namespace KaaVii;
 class StoreTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function getRedisMock()
-    {
-        return $this->getMock('\Redis');
-    }
-
     public function testFormatKeyAndPrefix()
     {
-        $redis = $this->getRedisMock();
+        $redis = $this->getMock('\Redis');
 
         $withoutPrefix = new Store($redis, '');
         $this->assertEquals('key', $withoutPrefix->formatKey('key'));
@@ -22,7 +17,7 @@ class StoreTest extends \PHPUnit_Framework_TestCase
 
     public function testPrefixHandlesTrailingColon()
     {
-        $redis = $this->getRedisMock();
+        $redis = $this->getMock('\Redis');
 
         $withoutColon = new Store($redis, 'prefix');
         $this->assertEquals('prefix:key', $withoutColon->formatKey('key'));
