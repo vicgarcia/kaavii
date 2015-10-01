@@ -1,7 +1,7 @@
 <?php
 namespace KaaVii;
 
-class Store
+class Storage
 {
     protected
         $prefix,
@@ -24,10 +24,7 @@ class Store
 
     public function set($key, $value)
     {
-        $formattedKey = $this->formatKey($key);
-        $serialized = serialize($value);
-
-        return $this->redis->set($formattedKey, $serialized);
+        return $this->redis->set($this->formatKey($key), serialize($value));
     }
 
     public function delete($key)
