@@ -4,26 +4,36 @@ namespace KaaVii;
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testFormatKeyAndPrefix()
+    public function testPrefixWithoutTrailingColon()
     {
         $redis = $this->getMock('\Redis');
 
-        $withoutPrefix = new Cache($redis, '');
-        $this->assertEquals('key', $withoutPrefix->formatKey('key'));
-
-        $withPrefix = new Cache($redis, 'prefix');
-        $this->assertEquals('prefix:key', $withPrefix->formatKey('key'));
+        $cache = new Cache($redis, 'prefix');
+        $this->assertEquals('prefix:key', $cache->formatKey('key'));
     }
 
-    public function testPrefixHandlesTrailingColon()
+    public function testPrefixWithTrailingColon()
     {
         $redis = $this->getMock('\Redis');
 
-        $withoutColon = new Cache($redis, 'prefix');
-        $this->assertEquals('prefix:key', $withoutColon->formatKey('key'));
+        $cache = new Cache($redis, 'prefix:');
+        $this->assertEquals('prefix:key', $cache->formatKey('key'));
+    }
 
-        $withColon = new Cache($redis, 'prefix:');
-        $this->assertEquals('prefix:key', $withColon->formatKey('key'));
+    public function testFormatKeyWithoutPrefix()
+    {
+        $redis = $this->getMock('\Redis');
+
+        $cache = new Cache($redis, '');
+        $this->assertEquals('key', $cache->formatKey('key'));
+    }
+
+    public function testFormatKeyWithPrefix()
+    {
+        $redis = $this->getMock('\Redis');
+
+        $cache = new Cache($redis, 'prefix');
+        $this->assertEquals('prefix:key', $cache->formatKey('key'));
     }
 
 }
