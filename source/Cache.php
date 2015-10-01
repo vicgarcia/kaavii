@@ -9,8 +9,9 @@ class Cache implements CacheInterface
 
     public function __construct(\Redis $redis, $prefix = 'cache:')
     {
-        $this->prefix = (substr($prefix, -1) == ':') ? $prefix : $prefix . ':';
         $this->redis = $redis;
+        $this->prefix = ( (substr($prefix, -1) == ':') or ($prefix == '') )
+                ? $prefix : $prefix . ':';
     }
 
     public function load($key)
@@ -49,7 +50,7 @@ class Cache implements CacheInterface
         return $deleted;
     }
 
-    protected function formatKey($id)
+    public function formatKey($id)
     {
         return $this->prefix . $id;
     }
