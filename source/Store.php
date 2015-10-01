@@ -9,8 +9,9 @@ class Store
 
     public function __construct(\Redis $redis, $prefix = '')
     {
-        $this->prefix = (substr($prefix, -1) == ':') ? $prefix : $prefix . ':';
         $this->redis = $redis;
+        $this->prefix = ( (substr($prefix, -1) == ':') or ($prefix == '') )
+                ? $prefix : $prefix . ':';
     }
 
     public function get($key)
@@ -39,8 +40,8 @@ class Store
         return $this->redis->keys($this->prefix . '*');
     }
 
-    protected function formatKey($id)
+    public function formatKey($key)
     {
-        return $this->prefix . $id;
+        return $this->prefix . $key;
     }
 }
