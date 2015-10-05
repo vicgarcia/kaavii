@@ -1,32 +1,31 @@
 <?php
+
 namespace KaaVii;
 
+
+/**
+ * the Kaavii\CacheInterface defines the functionality that is expected
+ * from cache implementations
+ *
+ **/
 interface CacheInterface
 {
-    /*
-     * @param string $id
-     * @return multi|false  value from cache or false if none
-     */
-    public function load($id);
+    public function load($key);
 
-    /*
-     * @param string $id
-     * @param multi $value
-     * @param int $ttl  time in seconds cache will exist
-     * @return self
-     */
-    public function save($id, $value, $ttl);
+    public function save($key, $value, $ttl);
 
-    /*
-     * @param string $id
-     * @return self
-     */
-    public function delete($id);
+    public function delete($key);
 
-    /*
-     * Remove (delete) all values stored in the cache
-     * @return self
-     */
     public function clear();
+}
+
+
+/**
+ * the Kaavii\CacheException typed exception, used for cache-related errors
+ *
+ **/
+class CacheException extends \Exception
+{
 
 }
+
