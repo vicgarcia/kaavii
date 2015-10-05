@@ -55,7 +55,7 @@ class Redis
         } else if (!empty(self::$config)) {
             $conf = self::$config;
         } else {
-            throw new \Exception('no config present for KaaVii\Redis');
+            throw new RedisException('no config present for KaaVii\Redis');
         }
 
         // create \Redis object

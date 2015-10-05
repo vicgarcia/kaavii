@@ -4,16 +4,62 @@ namespace KaaVii;
 class RedisTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testErrorWithNoConfig()
+    {
+        // we expect the exception is thrown, fails if it isn't
+        $this->setExpectedException('Kaavii\RedisException');
+
+        // unix config requires 'scheme' in config array
+        $redis = Redis::connect([]);
+    }
+
+    public function testErrorWithBadConfig()
+    {
+        // we expect the exception is thrown, fails if it isn't
+        $this->setExpectedException('Kaavii\RedisException');
+
+        // value for 'scheme must be either 'tcp' or 'unix'
+        $redis = Redis::connect([
+            'scheme' => 'other'
+        ]);
+    }
+
+    public function testErrorWithBadTcpConfig()
+    {
+        // we expect the exception is thrown, fails if it isn't
+        $this->setExpectedException('Kaavii\RedisException');
+
+        // tcp config requires 'host' and 'port' in config array also
+        $redis = Redis::connect([
+            'scheme' => 'tcp'
+        ]);
+    }
+
+    public function testErrorWithBadUnixConfig()
+    {
+        // we expect the exception is thrown, fails if it isn't
+        $this->setExpectedException('Kaavii\RedisException');
+
+        // unix config requires 'socket' in config array also
+        $redis = Redis::connect([
+            'scheme' => 'unix'
+        ]);
+    }
+
+    /* these tests require a running local redis server */
+
+    /**
+
     public function testFactoryMethodReturnsRedisObject()
     {
-        $redis = Redis::connect([ 'scheme' => 'tcp' ]);
+        $redis = Redis::connect([
+            'scheme' => 'tcp',
+            'host' => '127.0.0.1',
+            'port' => '6379',
+        ]);
 
         $this->assertInstanceOf('\Redis', $redis);
     }
-
-    /* these tests require a running redis server */
-
-    /**
 
     public function testGlobalTcpConfig()
     {
