@@ -2,6 +2,7 @@
 
 namespace KaaVii;
 
+
 /**
  * the KaaVii\Redis factory can be configured globally/statically ...
  *
