@@ -2,7 +2,6 @@
 
 namespace KaaVii;
 
-
 /**
  * the Kaavii\Cache class implements Kaavii\CacheInterface using \Redis
  * to provide an implementation for the cache functionality
@@ -16,7 +15,7 @@ class Cache implements CacheInterface
 
     /**
      * provide a configured \Redis object and a prefix string to use
-     * for redis keys for the cache'd values
+     * for redis keys for the cached values
      *
      **/
     public function __construct(\Redis $redis, $prefix = 'cache:')
@@ -77,7 +76,7 @@ class Cache implements CacheInterface
     public function clear()
     {
         if (empty($this->prefix)) {
-           throw new CacheException('empty prefix w/ clear() delete everything');
+           throw new CacheException('empty prefix w/ clear() will delete everything');
         }
 
         $deleted = 0;
@@ -100,4 +99,3 @@ class Cache implements CacheInterface
     }
 
 }
-

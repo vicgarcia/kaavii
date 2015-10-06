@@ -1,4 +1,5 @@
 <?php
+
 namespace KaaVii;
 
 class CacheTest extends \PHPUnit_Framework_TestCase
@@ -80,9 +81,9 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
         $redis = $this->getMockBuilder('\Redis')->getMock();
         $redis->expects($this->once())
-                ->method('set')
-                ->with('prefix:key', serialize($value))
-                ->willReturn(true);
+            ->method('set')
+            ->with('prefix:key', serialize($value))
+            ->willReturn(true);
 
         $cache = new Cache($redis, 'prefix');
 
@@ -95,9 +96,9 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
         $redis = $this->getMockBuilder('\Redis')->getMock();
         $redis->expects($this->once())
-                ->method('setex')
-                ->with('prefix:key', 200, serialize($value))
-                ->willReturn(true);
+            ->method('setex')
+            ->with('prefix:key', 200, serialize($value))
+            ->willReturn(true);
 
         $cache = new Cache($redis, 'prefix');
 
@@ -108,9 +109,9 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     {
         $redis = $this->getMockBuilder('\Redis')->getMock();
         $redis->expects($this->once())
-                ->method('delete')
-                ->with('prefix:key')
-                ->willReturn(true);
+            ->method('delete')
+            ->with('prefix:key')
+            ->willReturn(true);
 
         $cache = new Cache($redis, 'prefix');
 
@@ -132,12 +133,12 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     {
         $redis = $this->getMockBuilder('\Redis')->getMock();
         $redis->expects($this->once())
-                ->method('keys')
-                ->with('prefix:*')
-                ->willReturn(['one', 'two', 'three']);
+            ->method('keys')
+            ->with('prefix:*')
+            ->willReturn(['one', 'two', 'three']);
         $redis->expects($this->exactly(3))
-                ->method('del')
-                ->willReturn(true);
+            ->method('del')
+            ->willReturn(true);
 
         $cache = new Cache($redis, 'prefix');
 
