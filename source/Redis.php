@@ -1,16 +1,16 @@
 <?php
 
-namespace KaaVii;
+namespace Kaavii;
 
 
 /**
- * the KaaVii\Redis factory can be configured globally/statically ...
+ * the Kaavii\Redis factory can be configured globally/statically ...
  *
  *   with a file ...
- *     KaaVii\Redis::$config = require 'config/redis.php';
+ *     Kaavii\Redis::$config = require 'config/redis.php';
  *
  *   with an array ...
- *     KaaVii\Redis::$config = [
+ *     Kaavii\Redis::$config = [
  *        'sheme' => tcp,
  *        'host' => '127.0.0.1',
  *        'port' => '6379'
@@ -55,7 +55,7 @@ class Redis
         } else if (!empty(self::$config)) {
             $conf = self::$config;
         } else {
-            throw new RedisException('no config present for KaaVii\Redis');
+            throw new RedisException('no config present for Kaavii\Redis');
         }
 
         // create \Redis object
