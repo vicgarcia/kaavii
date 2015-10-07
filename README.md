@@ -19,8 +19,8 @@ Add this to your composer.json's require section and update Composer
 ### Kaavii\Redis
 
 The Kaavii\Redis class will be your starting point for using Kaavii.  This
-class provides a sort factory functionality for creating configured \Redis
-objects.
+class provides a globally accessible array for Redis configuration data as
+well as access to a factory method for creating \Redis client objects.
 
 To use it, you provide an array of configuration data, either as a global
 configuration or as a parameter to the factory method call.
@@ -53,9 +53,12 @@ configuration or as a parameter to the factory method call.
     // per-instance config can be provided as method param
     $redis = Kaavii\Redis::connect($config);
 
+    // the $redis object is the PHP extension \Redis class
+
 
 Use the factory method to create a new \Redis client.  The \Redis client is
 injected as a dependency in the constructor of other Kaavii components.
+
 
 ### Kaavii\Cache and Kaavii\NoCache
 
@@ -109,11 +112,13 @@ objects are saved to the cache, and objects are never retrieved from the cache.
         $cache->save('weatherchart', $weatherchart);
     }
 
+
 ### Kaavii\Storage
 
 The Kaavii\Storage component provides a simple way to use Redis as a key value
 storage.  Handling for keys and serialization of the value data is also
-available.
+provided.  Kaavii\Storage provides a dramatically simplified way to do basic
+data storage in Redis.
 
     // configure redis and connect
     Kaavii\Redis::$config = require 'config/redis.php';
@@ -133,4 +138,5 @@ available.
 
     // get all keys, requires a prefix be used above
     $keys = $storage->keys();
+
 
