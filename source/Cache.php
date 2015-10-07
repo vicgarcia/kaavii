@@ -19,7 +19,7 @@ class Cache implements CacheInterface
      * for redis keys for the cached values
      *
      **/
-    public function __construct(\Redis $redis, $prefix = 'cache:')
+    public function __construct(\Redis $redis, $prefix = 'cache')
     {
         $this->redis = $redis;
         $this->prefix = ( (substr($prefix, -1) == ':') or ($prefix == '') )
@@ -77,7 +77,8 @@ class Cache implements CacheInterface
     public function clear()
     {
         if (empty($this->prefix)) {
-           throw new CacheException('empty prefix w/ clear() will delete everything');
+            throw new CacheException(
+                'empty prefix w/ clear() will delete excessively');
         }
 
         $deleted = 0;

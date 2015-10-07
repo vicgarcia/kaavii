@@ -19,7 +19,7 @@ class Storage
      * for redis keys for the stored values
      *
      **/
-    public function __construct(\Redis $redis, $prefix = '')
+    public function __construct(\Redis $redis, $prefix = 'kaavii')
     {
         $this->redis = $redis;
         $this->prefix = ( (substr($prefix, -1) == ':') or ($prefix == '') )
@@ -70,7 +70,8 @@ class Storage
     public function keys()
     {
         if (empty($this->prefix)) {
-           throw new StorageException('empty prefix w/ clear() delete everything');
+            throw new StorageException(
+                'empty prefix w/ keys() has excessive exposure');
         }
 
         return $this->redis->keys($this->prefix . '*');
