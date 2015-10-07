@@ -115,10 +115,9 @@ objects are saved to the cache, and objects are never retrieved from the cache.
 
 ### Kaavii\Storage
 
-The Kaavii\Storage component provides a simple way to use Redis as a key value
-storage.  Handling for keys and serialization of the value data is also
-provided.  Kaavii\Storage provides a dramatically simplified way to do basic
-data storage in Redis.
+The Kaavii\Storage component is a simple way to use Redis as a key value
+storage.  It provides handling for namespaced keys and serialization of
+the value data throught the use of simple get() and set() methods.
 
     // configure redis and connect
     Kaavii\Redis::$config = require 'config/redis.php';
