@@ -65,8 +65,8 @@ The Kaavii\Cache object is used to provide functionality to cache data to Redis.
     Kaavii\Redis::$config = require 'config/redis.php';
     $redis = Kaavii\Redis::connect();
 
-    // a prefix is prepended to keys, seperated by a colon, when
-    // storing the values in Redis, as is convention
+    // a prefix is prepended to keys, seperated by a colon
+    // this type of namespacing is convention with Redis
     $prefix = 'cache';
 
     // create cache object
