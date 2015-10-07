@@ -13,7 +13,7 @@ get set up and using Redis for these.
 
 Add this to your composer.json's require section and update Composer
 
-    "vicgarcia/kaavii": "dev-dev",
+    "vicgarcia/kaavii": "dev-master"
 
 
 ### Kaavii\Redis
@@ -48,10 +48,10 @@ configuration or as a parameter to the factory method call.
     ];
 
     // getting a redis client object
-    $redis = Kaavii\Redis::connect()
+    $redis = Kaavii\Redis::connect();
 
     // per-instance config can be provided as method param
-    $redis = Kaavii\Redis::connect($config)
+    $redis = Kaavii\Redis::connect($config);
 
 
 Use the factory method to create a new \Redis client.  The \Redis client is
@@ -60,6 +60,10 @@ injected as a dependency in the constructor of other Kaavii components.
 ### Kaavii\Cache and Kaavii\NoCache
 
 The Kaavii\Cache object is used to provide functionality to cache data to Redis.
+
+Objects are serialized before being stored in the Redis cache, and are
+unserialized when they are retrieved.  Any object that supports serialization
+can be cached.
 
     // configure redis and connect
     Kaavii\Redis::$config = require 'config/redis.php';
@@ -70,7 +74,7 @@ The Kaavii\Cache object is used to provide functionality to cache data to Redis.
     $prefix = 'cache';
 
     // create cache object
-    $cache = Kaavii\Cache($redis, $prefix);
+    $cache = new Kaavii\Cache($redis, $prefix);
 
     // a simple cache block
     if ( ($lifestream = $cache->load('lifestream')) === false ) {
@@ -81,7 +85,7 @@ The Kaavii\Cache object is used to provide functionality to cache data to Redis.
     // delete a cached value by key
     $cache->delete('lifestream');
 
-    // clear all cached values
+    // clear all cached values, requires a prefix was used above
     $cache->clear();
 
 
@@ -90,16 +94,20 @@ the cache functionality.  When using this object, there is no action taken when
 objects are saved to the cache, and objects are never retrieved from the cache.
 
     // a NoCache object needs no Redis client
+    $env = 'dev';
     $cache = new Kaavii\NoCache;
+    if ($env == 'prod') {
+        // not called when $env is 'dev' as it is
+        $cache = new Kaavii\Cache(Kaavii\Redis::connect(), 'cache');
+    }
 
-    // with nocache, the code within the block will always execute
+    // with NoCache, the code within the block will always execute
     if ( ($weatherchart = $cache->load('weatherchart')) === false ) {
         $weatherchart = (new WeatherChart())->getDaily();
 
-        // with nocache, nothing is 'saved', the method simply returns
+        // with NoCache, nothing is 'saved', the method simply returns
         $cache->save('weatherchart', $weatherchart);
     }
-
 
 ### Kaavii\Storage
 
@@ -112,7 +120,7 @@ available.
     $redis = Kaavii\Redis::connect();
 
     // create storage object
-    $storage = Kaavii\Storage($redis, 'prefix');
+    $storage = new Kaavii\Storage($redis, 'prefix');
 
     // get a value from storage
     $value = $storage->get('key');
@@ -120,9 +128,9 @@ available.
     // save value to storage
     $storage->set('key', $value);
 
-    // get all keys
-    $keys = $storage->keys();
-
     // delete a key
     $storage->delete('key');
+
+    // get all keys, requires a prefix be used above
+    $keys = $storage->keys();
 
