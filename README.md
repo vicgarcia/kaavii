@@ -97,7 +97,7 @@ objects are saved to the cache, and objects are never retrieved from the cache.
         $weatherchart = (new WeatherChart())->getDaily();
 
         // with nocache, nothing is 'saved', the method simply returns
-        $cache->save('weatherchart', $weatherchart, (24 * 60 * 60);
+        $cache->save('weatherchart', $weatherchart);
     }
 
 
