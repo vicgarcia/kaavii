@@ -1,6 +1,6 @@
 {
     "name": "vicgarcia/kaavii",
-    "description": "KaaVii (pronounced K-V) is a package to provide components to interact with Redis for storage and caching",
+    "description": "KaaVii (pronounced kay-vee) is a package to provide components to interact with Redis for storage and caching",
     "type": "library",
     "require": {
         "php": ">=5.4.0",
