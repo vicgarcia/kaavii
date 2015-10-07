@@ -139,3 +139,26 @@ the value data throught the use of simple get() and set() methods.
     $keys = $storage->keys();
 
 
+### Usage With Slim Framework
+
+Kaavii was created mostly for my own use in Slim framework applications.
+
+    // static config for redis is provided in bootstrap.php
+
+    // setup a singleton method for the cache
+    $app->container->singleton('cache', function() use{
+        if ($GLOBALS['environment'] == 'production')
+            return new Kaavii\Cache( Kaavii\Redis::connect() );
+        return new Kaavii\NoCache;
+    }
+
+    // now you can use the cache as part of the app object
+    $app->get('/stations', function() use ($app) {
+        if (($stations = $app->cache->load('stations')) === false) {
+            $stations = $app->divvy->getStationsData();
+            $app->cache->save('stations', $stations, 600);
+        }
+        echo json_encode($stations);
+    });
+
+
