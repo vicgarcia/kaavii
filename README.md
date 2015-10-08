@@ -1,4 +1,5 @@
-## Kaavii       [![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
+## Kaavii
+[![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
 
 Kaavii (pronounced kay-vee) is a simple library to provide functionality to
 interact with Redis for cache and key-value data storage.  Kaavii is designed
