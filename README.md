@@ -1,10 +1,11 @@
-## Kaavii   [![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
+## Kaavii
 
 Kaavii (pronounced kay-vee) is a simple library to provide functionality to
 interact with Redis for cache and key-value data storage.  Kaavii is designed
 to provide a very basic set of tools perfect for simple applications or
 rapid prototyping.
 
+[![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
 Kaavii requires PHP >=5.4 and the Redis extension.
 
 I create Kaavii because I like using Redis.  Cache and simple storage are
