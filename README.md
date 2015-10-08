@@ -1,4 +1,4 @@
-## Kaavii
+## Kaavii   [![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
 
 Kaavii (pronounced kay-vee) is a simple library to provide functionality to
 interact with Redis for cache and key-value data storage.  Kaavii is designed
@@ -14,8 +14,6 @@ get set up and using Redis for these.
 Add this to your composer.json's require section and update Composer
 
     "vicgarcia/kaavii": "dev-master"
-
-[![Build Status](https://travis-ci.org/vicgarcia/kaavii.svg)](https://travis-ci.org/vicgarcia/kaavii)
 
 
 ### Kaavii\Redis
