@@ -1,13 +1,11 @@
-<?php
-
-namespace Kaavii;
-
+<?php namespace Kaavii;
 
 /**
  * the Kaavii\Storage class implements an incredibly simple \Redis
  * backed key-value storage system for serialized PHP values/objects
  *
  **/
+
 class Storage
 {
     protected
@@ -15,8 +13,8 @@ class Storage
         $redis;
 
     /**
-     * provide a configured \Redis object and a prefix string to use
-     * for redis keys for the stored values
+     * provide a configured \Redis object and a prefix string to
+     * automatically append to provided keys
      *
      **/
     public function __construct(\Redis $redis, $prefix = 'kaavii')
@@ -87,14 +85,5 @@ class Storage
     {
         return $this->prefix . $key;
     }
-}
-
-
-/**
- * the Kaavii\StorageException typed exception, used for Kaavii\Storage related errors
- *
- **/
-class StorageException extends \Exception
-{
 
 }
