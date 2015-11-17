@@ -1,13 +1,11 @@
-<?php
-
-namespace Kaavii;
-
+<?php namespace Kaavii;
 
 /**
  * the Kaavii\NoCache class provides a sort of 'stub' to use in place of
  * a configured Kaavii\Cache object in order to disable caching
  *
  **/
+
 class NoCache implements CacheInterface
 {
     public function __construct() {}

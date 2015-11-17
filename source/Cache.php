@@ -1,13 +1,11 @@
-<?php
-
-namespace Kaavii;
-
+<?php namespace Kaavii;
 
 /**
  * the Kaavii\Cache class implements Kaavii\CacheInterface using \Redis
  * to provide an implementation for the cache functionality
  *
  **/
+
 class Cache implements CacheInterface
 {
     protected

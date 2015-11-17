@@ -1,7 +1,4 @@
-<?php
-
-namespace Kaavii;
-
+<?php namespace Kaavii;
 
 /**
  * the Kaavii\Redis factory can be configured globally/statically ...
@@ -38,6 +35,7 @@ namespace Kaavii;
  *   $redis = Kaavii\Redis::connect($config)
  *
  **/
+
 class Redis
 {
     public static
@@ -94,14 +92,5 @@ class Redis
 
         return $redis;
     }
-}
-
-
-/**
- * the Kaavii\RedisException typed exception, used for redis-related errors
- *
- **/
-class RedisException extends \Exception
-{
 
 }
