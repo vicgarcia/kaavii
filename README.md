@@ -15,7 +15,7 @@ get set up and using Redis for these.
 
 Add this to your composer.json's require section and update Composer
 
-    "vicgarcia/kaavii": "dev-master"
+    "vicgarcia/kaavii": "1.0.*"
 
 
 ### Kaavii\Redis
